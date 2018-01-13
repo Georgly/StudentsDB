@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Group Page</title>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" th:href="@{/css/materialize.css}" media="screen,projection"/>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+<div >
+    <h2>Group</h2>
+    <h4>Number</h4>
+    <div class="row">
+        <div class="col s7">
+            <h5 th:text=" ${group.group_number}">...</h5>
+        </div>
+    </div>
+    <h4>Year</h4>
+    <div class="row">
+        <div class="col s7">
+            <h5 th:text=" ${group.year}">...</h5>
+        </div>
+    </div>
+    <h3>Students</h3>
+    <table class="highlight">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Tasks</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="student : ${students}">
+            <td th:utext="${student.name}">...</td>
+            <td th:utext="${student.task1}">...</td>
+            <td th:utext="${student.task2}">...</td>
+            <td th:utext="${student.task3}">...</td>
+        </tr>
+</div>
+
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" th:src="@{/js/materialize.min.js}"></script>
+<script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.js"></script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Student List</title>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" th:href="@{/css/materialize.css}" media="screen,projection"/>
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+
+<body>
+
+
+<div>
+    <h4> Add group</h4>
+
+    <form id="addForm" th:action="@{/addGroup}"
+          th:object="${addForm}" method="POST">
+
+
+        <div class="row">
+
+            <div class="input-field col s6">
+                <input id="number" type="text" class="validate" th:field="*{group_number}">
+                <label class="active" for="number">Number</label>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="input-field col s6">
+                <input id="year" type="text" class="validate" th:field="*{year}">
+                <label class="active" for="year">Year</label>
+            </div>
+        </div>
+        <input type="submit" style="visibility: hidden"/>
+        <div class="row">
+            <a th:href="@{/}"
+               class="btn-floating btn-small waves-effect waves-light orange darken-3"><i class="material-icons">arrow_back</i></a>
+        </div>
+    </form>
+
+    <div class="row">
+        <div class="col s8 offset-s2">
+            <div class="card-panel white-text teal lighten-2" th:if="${errorMessage}" th:utext="${errorMessage}">
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" th:src="@{/js/materialize.min.js}"></script>
+<script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.js"></script>
+
+<script th:inline="javascript">
+    $(document).ready(function () {
+        $("#addButton").click(function () {
+            $(location).attr('href', "/");
+        });
+        $("#addForm").validate({
+            rules: {
+                number: {
+                    required: true
+                },
+                year: {
+                    required: true
+                }
+            },
+            //For custom messages
+            messages: {
+                name: {
+                    required: "Enter group number",
+                    minlength: "Enter only one digit"
+                }
+            },
+            errorElement: 'div',
+            errorPlacement: function (error, element) {
+                var placement = $(element).data('error');
+                if (placement) {
+                    $(placement).append(error)
+                } else {
+                    error.insertAfter(element);
+                }
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
